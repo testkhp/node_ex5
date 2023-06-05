@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 목록 페이지</title>
+    <style>
+        .lists { border:1px solid #000; margin:20px;}
+    </style>
+</head>
+<body>
+    <!-- 데이터베이스에 있는 데이터값 갯수만큼 생성-->
+        
+    <% for(let i=0; i<data.length; i++){ %>
+        <div class="lists">
+            <input type="checkbox" name="delOk[]" class="delOk" value="<%- data[i].num %>">
+            <div><%- data[i].num %></div>
+            <div><%- data[i].title %> </div>
+            <div><%- data[i].author %> </div>
+            <a href="/brdupdate/<%- data[i].num %>">수정</a>
+            <a href="/dbdelete/<%- data[i].num %>">삭제</a>
+           
+        </div>
+    <% } %>
+
+    <a href="/brdinsert">글쓰기</a>
+</body>
+</html>

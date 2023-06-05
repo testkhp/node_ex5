@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 수정페이지는 입력페이지랑 태그구성,디자인은 똑같음
+      action 속성 -> 경로요청은 달라짐
+      input태그의 value값은 db에서 가지고온 데이터값을 가지고 표시
+    -->
+    <form action="/dbupdate" method="post">
+        <!-- input type hidden 실제 화면상에서는 안보이지만
+           전송버튼을 눌렀을 때 데이터값 보낼 수 있는 타입
+        -->
+        <input type="hidden" name="num" value="<%- data.num %>">
+        <input type="text" name="title" value="<%- data.title %>">
+        <input type="text" name="author" value="<%- data.author %>">
+        <button type="submit">게시글수정완료</button>
+    </form>
+</body>
+</html>

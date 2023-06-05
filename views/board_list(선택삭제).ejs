@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 목록 페이지</title>
+    <style>
+        .lists { border:1px solid #000; margin:20px;}
+    </style>
+</head>
+<body>
+    <!-- 데이터베이스에 있는 데이터값 갯수만큼 생성-->
+    <form id="my" action="/del" method="get">
+        
+    <% for(let i=0; i<data.length; i++){ %>
+        <div class="lists">
+            <input type="checkbox" name="delOk[]" class="delOk" value="<%- data[i].num %>">
+            <div><%- data[i].num %></div>
+            <div><%- data[i].title %> </div>
+            <div><%- data[i].author %> </div>
+            <a href="/brdupdate/<%- data[i].num %>">수정</a>
+            <a href="/dbdelete/<%- data[i].num %>">삭제</a>
+           
+        </div>
+    <% } %>
+    <button type="submit" id="selectDelete">선택삭제</button>
+    <input type="checkbox" id="toggle"><label for="toggle">전체선택/전체해제</label>
+    </form>
+      <a href="/brdinsert">글쓰기</a>
+
+    <script>
+        document.querySelector("#selectDelete").addEventListener("click",(e)=>{
+            let result = window.confirm("선택한 항목들을 삭제하시겠습니까?");
+            if(result){
+                if(document.querySelectorAll(".delOk:checked").length > 0){
+                     alert("선택한 항목들을 삭제하였습니다");
+                     document.querySelector("#my").submit();
+                }
+                else{
+                    alert("선택한 항목이 없습니다.");
+                    e.preventDefault();
+                }  
+            }
+            else{
+                alert("삭제를 취소하였습니다.");
+                e.preventDefault();
+            }
+        })
+        
+        document.querySelector("#toggle").addEventListener("click",()=>{
+            const list = document.querySelectorAll(".delOk");
+            let checkToggle = document.querySelector("#toggle").checked;
+            list.forEach((el,index)=>{
+                el.checked = checkToggle;
+            })
+        });
+    </script>
+</body>
+</html>
